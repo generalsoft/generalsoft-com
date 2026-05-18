@@ -1,0 +1,8 @@
+{
+  "name": "Generalsoft Corporation",
+  "description": "Professional landing page for Generalsoft Corporation, providing custom software development for everyone worldwide.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
