@@ -6,6 +6,7 @@
 import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 import { CORE_VALUES, SOLUTIONS, LEADERSHIP, JOBS, MILESTONES, OFFICES } from '../data';
 import { CoreValue, Solution, Leader, JobPost, Milestone, Office } from '../types';
+import abidImage from '../assets/images/abid.jpg';
 
 export type Language = 'en' | 'de';
 
@@ -483,7 +484,7 @@ const LEADERSHIP_DE: Leader[] = [
     role: "Chief Executive Officer & Gründerin",
     bio: "Nasim besitzt einen MBA-Abschluss von der LUMS. Er begann bereits 1982 mit dem Programmieren auf einem Computer mit nur 1 Kilobyte Arbeitsspeicher. Bevor er Generalsoft gründete, leitete er Enterprise-Architecture-Teams bei Microsoft und ADP und war maßgeblich an der Entwicklung früher Cloud-Orchestrierungs-Frameworks beteiligt.",
     quote: "Echte Software-Handwerkskunst dreht sich um strukturelle Langlebigkeit. Wir bauen Architekturen, die mit dem Unternehmen wachsen und als dauerhafte Fundamente dienen, statt als transaktionsbezogene Flicken.",
-    avatarUrl: "https://picsum.photos/seed/evelyn/300/300",
+    avatarUrl: abidImage,
     department: "Executive"
   }
 ];

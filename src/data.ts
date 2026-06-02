@@ -4,6 +4,7 @@
  */
 
 import { Milestone, CoreValue, Leader, Solution, Office, JobPost } from './types';
+import abidImage from './assets/images/abid.jpg';
 
 export const MILESTONES: Milestone[] = [
   {
@@ -151,7 +152,7 @@ export const LEADERSHIP: Leader[] = [
     role: "Chief Executive Officer & Founder",
     bio: "Nasim holds an MBA from LUMS. He started programming in 1982 with a computer that had a 1 kilobyte RAM. Before founding Generalsoft, he led enterprise architecture teams at Microsoft and ADP, pioneering early cloud orchestration frameworks.",
     quote: "True software craftsmanship is about structural longevity. We build architectures that grow with the enterprise, serving as durable foundations rather than transactional patches.",
-    avatarUrl: "../assets/images/abid.jpg",
+    avatarUrl: abidImage,
     department: "Executive"
   }
 ];
