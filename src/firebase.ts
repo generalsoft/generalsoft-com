@@ -11,5 +11,20 @@ const firebaseConfig = {
   measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
 
+const requiredConfigKeys = [
+  'VITE_FIREBASE_API_KEY',
+  'VITE_FIREBASE_AUTH_DOMAIN',
+  'VITE_FIREBASE_PROJECT_ID',
+  'VITE_FIREBASE_STORAGE_BUCKET',
+  'VITE_FIREBASE_MESSAGING_SENDER_ID',
+  'VITE_FIREBASE_APP_ID'
+];
+
+const viteEnv = import.meta.env as Record<string, string | undefined>;
+const missingKeys = requiredConfigKeys.filter((key) => !viteEnv[key]);
+if (missingKeys.length) {
+  console.error('Missing Firebase config env vars:', missingKeys.join(', '));
+}
+
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);

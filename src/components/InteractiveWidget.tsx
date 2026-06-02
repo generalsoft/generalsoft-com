@@ -18,6 +18,7 @@ export default function InteractiveWidget() {
   const [showResult, setShowResult] = useState<boolean>(false);
   const [bookingSubmitted, setBookingSubmitted] = useState<boolean>(false);
   const [bookingState, setBookingState] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  const [bookingError, setBookingError] = useState<string | null>(null);
   const [demoName, setDemoName] = useState<string>('');
   const [demoEmail, setDemoEmail] = useState<string>('');
 
@@ -88,20 +89,29 @@ export default function InteractiveWidget() {
     if (!demoName || !demoEmail) return;
 
     setBookingState('sending');
+    setBookingError(null);
+    const timeoutPromise = new Promise<never>((_, reject) =>
+      window.setTimeout(() => reject(new Error('The booking request timed out. Please try again.')), 15000)
+    );
+
     try {
-      await addDoc(collection(db, 'demo_appointments'), {
-        name: demoName,
-        email: demoEmail,
-        industry,
-        scale,
-        bottleneck,
-        language,
-        timestamp: serverTimestamp(),
-      });
+      await Promise.race([
+        addDoc(collection(db, 'demo_appointments'), {
+          name: demoName,
+          email: demoEmail,
+          industry,
+          scale,
+          bottleneck,
+          language,
+          timestamp: serverTimestamp(),
+        }),
+        timeoutPromise,
+      ]);
       setBookingState('success');
       setBookingSubmitted(true);
     } catch (err) {
       console.error('Booking write failed', err);
+      setBookingError(err instanceof Error ? err.message : 'Unable to book the demo appointment.');
       setBookingState('error');
     }
   };
@@ -360,6 +370,9 @@ export default function InteractiveWidget() {
                           {bookingState === 'sending' ? 'Booking...' : t('config_btn_book')}
                         </button>
                       </div>
+                      {bookingState === 'error' && bookingError ? (
+                        <p className="text-sm text-red-600">{bookingError}</p>
+                      ) : null}
                     </form>
                   ) : (
                     <motion.div

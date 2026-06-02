@@ -143,11 +143,13 @@ const LandingPage = () => {
 
 const ContactPage = ({ onNavigate }: { onNavigate: (sectionId: string) => void }) => {
   const { t, language } = useLanguage();
-  const [status, setStatus] = useState<'idle' | 'sending' | 'success'>('idle');
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus('sending');
+    setSubmitError(null);
     const formData = new FormData(e.currentTarget);
     const payload = {
       name: formData.get('name'),
@@ -157,13 +159,22 @@ const ContactPage = ({ onNavigate }: { onNavigate: (sectionId: string) => void }
       language,
     };
     console.log('Submitting inquiry', payload);
+
+    const timeoutPromise = new Promise<never>((_, reject) =>
+      window.setTimeout(() => reject(new Error('The submission timed out. Please try again.')), 15000)
+    );
+
     try {
-      const docRef = await addDoc(collection(db, "inquiries"), payload);
-      console.log('Firestore write success', docRef.id);
+      const docRef = await Promise.race([
+        addDoc(collection(db, 'inquiries'), payload),
+        timeoutPromise,
+      ]);
+      console.log('Firestore write success', (docRef as any).id);
       setStatus('success');
     } catch (err) {
-      console.error("Firebase Error:", err);
-      setStatus('idle');
+      console.error('Firebase Error:', err);
+      setSubmitError(err instanceof Error ? err.message : 'Unable to submit inquiry.');
+      setStatus('error');
     }
   };
 
@@ -235,6 +246,9 @@ const ContactPage = ({ onNavigate }: { onNavigate: (sectionId: string) => void }
                 {status === 'sending' ? '...' : t('formSubmit')}
                 <Send className="w-4 h-4" />
               </button>
+              {status === 'error' && submitError ? (
+                <p className="text-sm text-red-600 mt-2">{submitError}</p>
+              ) : null}
             </form>
           )}
         </div>
