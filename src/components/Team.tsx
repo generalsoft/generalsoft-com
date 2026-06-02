@@ -93,7 +93,7 @@ export default function Team() {
                   </button>
 
                   <a
-                    href="https://linkedin.com"
+                    href="https://linkedin.com/in/generalsoft"
                     target="_blank"
                     rel="noreferrer"
                     className="text-slate-400 hover:text-indigo-600 transition-colors p-1"

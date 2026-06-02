@@ -27,6 +27,8 @@ const LanguageContext = createContext<LanguageContextProps | undefined>(undefine
 const TRANSLATION_DICTIONARY: Record<Language, Record<string, string>> = {
   en: {
     // Nav / Header
+    meta_title_home: "Generalsoft | Enterprise Architecture, Cloud Orchestration & AI",
+    meta_title_suffix: "Generalsoft",
     nav_overview: "Overview",
     nav_values: "Core Values",
     nav_platforms: "Solutions",
@@ -39,8 +41,8 @@ const TRANSLATION_DICTIONARY: Record<Language, Record<string, string>> = {
 
     // Hero Section
     hero_badge: "Empowering Global Enterprises Since 2014",
-    hero_title_1: "Autonomous Systems.",
-    hero_title_2: "Resilient Longevity.",
+    hero_title_1: "Autonomous Enterprise Systems.",
+    hero_title_2: "Cloud Orchestration & Longevity.",
     hero_desc: "Generalsoft Corporation pioneers fault-tolerant custom operating layers, high-volume transactional pipelines, and autonomous AI-driven architecture modernization systems that enable global enterprises to scale without fear of obsolescence.",
     hero_cta_mission: "Explore Company Mission",
     hero_cta_careers: "View Careers",
@@ -173,7 +175,7 @@ const TRANSLATION_DICTIONARY: Record<Language, Record<string, string>> = {
     web: "Web Design",
     app: "App Design",
     edu: "Education & Training",
-    landing_title: "Engineering Excellence.",
+    landing_title: "Scalable Enterprise Software Engineering.",
     landing_desc: "We specialize in high-performance custom software solutions that scale. Our focus is on usability, security, and global accessibility.",
     contactTitle: "Get in touch",
     contactSub: "We respond within 24 business hours.",
@@ -187,6 +189,8 @@ const TRANSLATION_DICTIONARY: Record<Language, Record<string, string>> = {
   },
   de: {
     // Nav / Header
+    meta_title_home: "Generalsoft | Enterprise-Architektur, Cloud-Orchestrierung & KI",
+    meta_title_suffix: "Generalsoft",
     nav_overview: "Übersicht",
     nav_values: "Kernwerte",
     nav_platforms: "Lösungen",
@@ -199,8 +203,8 @@ const TRANSLATION_DICTIONARY: Record<Language, Record<string, string>> = {
 
     // Hero Section
     hero_badge: "Globale Unternehmen stärken seit 2014",
-    hero_title_1: "Autonome Systeme.",
-    hero_title_2: "Echte Langlebigkeit.",
+    hero_title_1: "Autonome Enterprise-Systeme.",
+    hero_title_2: "Cloud-Orchestrierung & Langlebigkeit.",
     hero_desc: "Die Generalsoft Corporation leistet Pionierarbeit bei ausfallsicheren Betriebssystemschichten, hochvolumigen Transaktionspipelines und autonomen KI-gesteuerten Systemmodernisierungen, die es globalen Unternehmen ermöglichen, ohne Angst vor Veraltung zu skalieren.",
     hero_cta_mission: "Unternehmensmission erkunden",
     hero_cta_careers: "Offene Stellen ansehen",
@@ -333,8 +337,8 @@ const TRANSLATION_DICTIONARY: Record<Language, Record<string, string>> = {
     web: "Webdesign",
     app: "App-Design",
     edu: "Ausbildung & Training",
-    landing_title: "Hervorragende Technik.",
-    landing_desc: "Wir spezialisieren uns auf leistungsstarke kundenspezifische Softwarelösungen, die skalieren. Unser Fokus liegt auf Benutzerfreundlichkeit, Sicherheit und globaler Zugänglichkeit.",
+    landing_title: "Skalierbare Enterprise-Software-Entwicklung.",
+    landing_desc: "Wir sind spezialisiert auf hochperformante, maßgeschneiderte Softwarelösungen für Unternehmen. Unser Fokus liegt auf Skalierbarkeit, Sicherheit und globaler Verfügbarkeit.",
     contactTitle: "Kontaktieren Sie uns",
     contactSub: "Wir antworten innerhalb von 24 Geschäftsstunden.",
     formName: "Vollständiger Name",

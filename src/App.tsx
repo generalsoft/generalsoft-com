@@ -58,86 +58,86 @@ const LandingPage = () => {
     <>
       <Hero onExploreClick={() => { window.location.hash = 'about'; }} />
 
-    {/* Partners Section */}
-    <section className="py-12 px-6 bg-white overflow-hidden">
-      <div className="max-w-7xl mx-auto">
-        <p className="text-center text-xs font-bold text-brand-steel/40 uppercase tracking-[0.3em] mb-10">
-          {t('partners')}
-        </p>
-        <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-40 grayscale hover:grayscale-0 transition-all">
-          {['Microsoft', 'Oracle', 'Google', 'Cisco', 'IBM'].map((partner) => (
-            <span key={partner} className="font-display text-2xl font-black text-brand-navy tracking-tighter">
-              {partner.toUpperCase()}
-            </span>
-          ))}
+      {/* Partners Section */}
+      <section className="py-12 px-6 bg-white overflow-hidden">
+        <div className="max-w-7xl mx-auto">
+          <p className="text-center text-xs font-bold text-brand-steel/40 uppercase tracking-[0.3em] mb-10">
+            {t('partners')}
+          </p>
+          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-40 grayscale hover:grayscale-0 transition-all">
+            {['Microsoft', 'Oracle', 'Google', 'Cisco', 'IBM'].map((partner) => (
+              <span key={partner} className="font-display text-2xl font-black text-brand-navy tracking-tighter">
+                {partner.toUpperCase()}
+              </span>
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    {/* Services Section */}
-    <section className="py-24 bg-brand-navy/[0.02] border-y border-brand-steel/10 px-6" id="services">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
-          <div className="max-w-xl">
+      {/* Services Section */}
+      <section className="py-24 bg-brand-navy/[0.02] border-y border-brand-steel/10 px-6" id="services">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
+            <div className="max-w-xl">
             <h2 className="font-display text-4xl font-bold mb-6 italic">
-              {t('landing_title')}
+                {t('landing_title')}
             </h2>
-            <p className="text-brand-navy/60 leading-relaxed">
-              {t('landing_desc')}
-            </p>
+              <p className="text-brand-navy/60 leading-relaxed">
+                {t('landing_desc')}
+              </p>
+            </div>
+            <div className="text-sm font-mono text-brand-steel bg-white px-4 py-2 rounded-lg border border-brand-steel/10">
+              {t('since')}
+            </div>
           </div>
-          <div className="text-sm font-mono text-brand-steel bg-white px-4 py-2 rounded-lg border border-brand-steel/10">
-            {t('since')}
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <ServiceCard
+              icon={Sparkles}
+              title={t('ai')}
+              description="Advanced machine learning models and predictive analytics to drive intelligent business decisions."
+            />
+            <ServiceCard
+              icon={ShieldCheck}
+              title={t('cyber')}
+              description="Enterprise-grade security audits, threat mitigation, and data protection strategies since 1998."
+            />
+            <ServiceCard
+              icon={Cpu}
+              title={t('iot')}
+              description="Connecting the physical and digital worlds with robust embedded systems and IoT architectures."
+            />
+            <ServiceCard
+              icon={Code2}
+              title={t('web')}
+              description="High-performance, SEO-optimized web applications with modern UX/UI standards."
+            />
+            <ServiceCard
+              icon={Smartphone}
+              title={t('app')}
+              description="Native and cross-platform mobile solutions designed for engagement and scalability."
+            />
+            <ServiceCard
+              icon={GraduationCap}
+              title={t('edu')}
+              description="Technical workshops and corporate training to empower teams with cutting-edge tech skills."
+            />
           </div>
         </div>
+      </section>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <ServiceCard
-            icon={Sparkles}
-            title={t('ai')}
-            description="Advanced machine learning models and predictive analytics to drive intelligent business decisions."
-          />
-          <ServiceCard
-            icon={ShieldCheck}
-            title={t('cyber')}
-            description="Enterprise-grade security audits, threat mitigation, and data protection strategies since 1998."
-          />
-          <ServiceCard
-            icon={Cpu}
-            title={t('iot')}
-            description="Connecting the physical and digital worlds with robust embedded systems and IoT architectures."
-          />
-          <ServiceCard
-            icon={Code2}
-            title={t('web')}
-            description="High-performance, SEO-optimized web applications with modern UX/UI standards."
-          />
-          <ServiceCard
-            icon={Smartphone}
-            title={t('app')}
-            description="Native and cross-platform mobile solutions designed for engagement and scalability."
-          />
-          <ServiceCard
-            icon={GraduationCap}
-            title={t('edu')}
-            description="Technical workshops and corporate training to empower teams with cutting-edge tech skills."
-          />
-        </div>
-      </div>
-    </section>
+      <InteractiveWidget />
 
-    <InteractiveWidget />
+      <Values />
 
-    <Values />
+      <Timeline />
 
-    <Timeline />
+      <Solutions />
 
-    <Solutions />
+      <Team />
 
-    <Team />
-
-    <Offices />
-  </>
+      <Offices />
+    </>
   );
 };
 
@@ -591,13 +591,100 @@ export default function App() {
   useEffect(() => {
     // SEO/GEO Optimization
     document.documentElement.lang = language;
+
+    // Enhanced Keyword-rich Titles
     const title = page === 'home'
-      ? `Generalsoft Corporation | ${t('tagline')}`
-      : `${page.charAt(0).toUpperCase() + page.slice(1)} | Generalsoft`;
+      ? t('meta_title_home')
+      : `${page.charAt(0).toUpperCase() + page.slice(1)} | ${t('meta_title_suffix')}`;
     document.title = title;
 
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) metaDesc.setAttribute('content', t('heroSub'));
+
+    // Hreflang Tags for Language Discovery
+    const updateHreflang = (lang: string, href: string) => {
+      let el = document.querySelector(`link[hreflang="${lang}"]`);
+      if (!el) {
+        el = document.createElement('link');
+        el.setAttribute('rel', 'alternate');
+        el.setAttribute('hreflang', lang);
+        document.head.appendChild(el);
+      }
+      el.setAttribute('href', href);
+    };
+
+    const currentBase = window.location.origin + (page === 'home' ? '/' : `/#${page}`);
+    // Note: Ideally, localized versions should have unique URLs like ?lang=de
+    updateHreflang('en', currentBase);
+    updateHreflang('de', currentBase + (currentBase.includes('?') ? '&' : '?') + 'lang=de');
+    updateHreflang('x-default', currentBase);
+
+    // Canonical Tag Management
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement('link');
+      canonical.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonical);
+    }
+    const baseUrl = window.location.origin;
+    canonical.setAttribute('href', page === 'home' ? `${baseUrl}/` : `${baseUrl}/#${page}`);
+
+    // JSON-LD Schema Markup
+    const schemaData = {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Generalsoft Corporation",
+      "alternateName": "Generalsoft",
+      "url": "https://generalsoft.com",
+
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://generalsoft.com/logo.png"
+      },
+
+      "description": t("hero_desc"),
+
+      "sameAs": [
+        "https://www.linkedin.com/in/generalsoft",
+        "https://x.com/generalsoft",
+        "https://github.com/generalsoft",
+        "https://youtube.com/@generalsoft_ae",
+        "https://www.facebook.com/generalsoft"        
+      ],
+
+      "subjectOf": [
+        {
+          "@type": "WebSite",
+          "name": "Generalsoft AE (Affiliate)",
+          "url": "https://generalsoft.ae"
+        }
+      ],
+
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "url": "https://generalsoft.com/contact",
+          "availableLanguage": ["English"]
+        }
+      ],
+
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "AE"
+      },
+
+      "foundingDate": "2025"
+    };
+
+    let schemaScript = document.getElementById('json-ld-schema');
+    if (!schemaScript) {
+      schemaScript = document.createElement('script');
+      schemaScript.id = 'json-ld-schema';
+      schemaScript.setAttribute('type', 'application/ld+json');
+      document.head.appendChild(schemaScript);
+    }
+    schemaScript.innerHTML = JSON.stringify(schemaData);
   }, [page, language]);
 
   useEffect(() => {
