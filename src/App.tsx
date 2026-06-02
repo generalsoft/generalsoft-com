@@ -8,18 +8,13 @@ import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { db, isFirebaseConfigured } from "./firebase.ts";
 import { motion } from "motion/react";
 import {
-  Globe,
   Cpu,
   Code2,
   Mail,
   Phone,
   MapPin,
-  ExternalLink,
-  ChevronRight,
   ChevronLeft,
-  Users,
   ShieldCheck,
-  Layout,
   Smartphone,
   GraduationCap,
   Sparkles,
@@ -158,7 +153,6 @@ const ContactPage = ({ onNavigate }: { onNavigate: (sectionId: string) => void }
       timestamp: serverTimestamp(),
       language,
     };
-    console.log('Submitting inquiry', payload);
 
     const timeoutPromise = new Promise<never>((_, reject) =>
       window.setTimeout(() => reject(new Error('The submission timed out. Please try again.')), 15000)
@@ -172,7 +166,6 @@ const ContactPage = ({ onNavigate }: { onNavigate: (sectionId: string) => void }
         addDoc(collection(db, 'inquiries'), payload),
         timeoutPromise,
       ]);
-      console.log('Firestore write success', (docRef as any).id);
       setStatus('success');
     } catch (err) {
       console.error('Firebase Error:', err);
