@@ -1,13 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;750&display=swap');
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
 
 @theme {
+  --font-sans: "Space Grotesk", "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Montserrat", sans-serif;
   --color-brand-navy: #0D4A75;
   --color-brand-steel: #197A9F;
   --color-brand-teal: #3BB1BA;
   --color-brand-cyan: #4EECD6;
+}
+
+body {
+  background-color: #ffffff; /* Sleek pure white */
+  font-family: var(--font-sans);
+  color: #0f172a; /* Slate-900 */
+  @apply bg-[#f5f8fa] text-brand-navy antialiased;
+}
+
+/* Custom scrollbar matching sleek light theme style */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f8fafc; /* Slate-50 */
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1; /* Slate-300 */
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8; /* Slate-400 */
+}
+
+.office-map-background {
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 400'%3E%3Cg fill='%2394a3b8' opacity='0.12'%3E%3Cpath d='M45 220 C90 150 170 150 220 190 C260 220 325 235 395 220 C435 212 485 205 540 210 C600 215 645 225 700 220 C740 215 780 230 800 245 L800 400 L0 400 Z'/%3E%3Cpath d='M120 120 C150 95 200 90 240 115 C280 140 330 150 385 145 C430 142 470 130 510 132 C560 134 610 145 660 160 C705 172 745 190 780 220' fill='none' stroke='%2394a3b8' stroke-width='3' opacity='0.18'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: cover;
+  background-position: center;
 }
 
 @layer base {
