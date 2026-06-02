@@ -7,7 +7,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Settings, Server, TrendingUp, CheckCircle, ArrowRight, ShieldCheck, HelpCircle } from 'lucide-react';
 import { useLanguage } from './LanguageContext';
-import { db } from '../firebase.ts';
+import { db, isFirebaseConfigured } from '../firebase.ts';
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 
 export default function InteractiveWidget() {
@@ -95,6 +95,9 @@ export default function InteractiveWidget() {
     );
 
     try {
+      if (!isFirebaseConfigured || !db) {
+        throw new Error('Firebase is not configured properly. Check VITE_FIREBASE_* environment variables.');
+      }
       await Promise.race([
         addDoc(collection(db, 'demo_appointments'), {
           name: demoName,
