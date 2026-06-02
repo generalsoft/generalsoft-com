@@ -9,6 +9,76 @@ import { Cpu, Shield, Award, Zap, ArrowRight, CheckCircle2 } from 'lucide-react'
 import { useLanguage } from './LanguageContext';
 import { CoreValue } from '../types';
 
+// Static technical data moved outside component to minimize re-allocation and memory footprint
+const TECHNICAL_DEEP_DIVES: Record<string, Record<string, { subtitle: string; bullets: string[]; stat: string; statSub: string }>> = {
+  'agile-engineering': {
+    en: {
+      subtitle: "Behind the Architecture: Decoupled Scaling Infrastructure",
+      bullets: [
+        "Self-orchestrating container shards that adjust dynamically during hot traffic spikes.",
+        "Low-overhead load dispatchers optimized for modern kernel thread profiles.",
+        "Declarative platform state engines that instantly roll back failed micro-transactions."
+      ],
+      stat: "14ms",
+      statSub: "P99 Client Query Round-trip Time"
+    },
+    de: {
+      subtitle: "Hinter dem System: Entkoppelte Skalierungskonzepte",
+      bullets: [
+        "Selbstorganisierende Container-Shards, die sich bei Datenverkehrspitzen dynamisch anpassen.",
+        "Sehr schlanke Load-Dispatcher, optimiert für moderne Kernel-Thread-Profile.",
+        "Deklarative Plattform-Zustands-Engines für unmittelbare Rollbacks unvollständiger Mikrotransaktionen."
+      ],
+      stat: "14ms",
+      statSub: "P99 Client Query Latenzzeit"
+    }
+  },
+  'security-first': {
+    en: {
+      subtitle: "Behind the Security: Cryptographic Verification Pillars",
+      bullets: [
+        "Zero-knowledge query layers that protect critical end-user information globally.",
+        "Automatic end-to-end transport layer rotation with cryptographic dual-keys.",
+        "Ongoing background validation audits that trigger alerts on anomalous system queries."
+      ],
+      stat: "AES-GCM",
+      statSub: "256-bit Hardened Hardware Encryption"
+    },
+    de: {
+      subtitle: "Hinter der Sicherheit: Kryptografische Verifizierungssäulen",
+      bullets: [
+        "Zero-Knowledge-Abfrageschichten, die kritische Endnutzerdaten weltweit schützen.",
+        "Zweiseitig verschlüsselte automatische Transportlayer-Zyklen mit rotierenden Schlüsseln.",
+        "Fortlaufende Hintergrundaudits, die bei verdächtigen Systemanfragen Alarm schlagen."
+      ],
+      stat: "AES-GCM",
+      statSub: "256-bit Hardware-gestützte Verschlüsselung"
+    }
+  },
+  'human-centric': {
+    en: {
+      subtitle: "Behind the UX: Redundant-free Interfaces & APIs",
+      bullets: [
+        "Interactive dashboard architectures optimized for lightning-quick cognitive capture.",
+        "Uniform OpenAPI layout blueprints and modular developer tooling templates.",
+        "Accessible visual interfaces supporting high-contrast, text-to-speech, and responsive layouts."
+      ],
+      stat: "85%",
+      statSub: "Reduction in Developer Onboarding Lead Time"
+    },
+    de: {
+      subtitle: "Hinter der UX: Redundanzfreie Oberflächen & APIs",
+      bullets: [
+        "Interaktives Dashboard-Design, optimiert auf schnelles kognitives Erfassen.",
+        "Einheitliche OpenAPI-Blueprints und modulare Entwickler-Toolingtemplates.",
+        "Barrierefreie visuelle Designs, die Vorlesemodus, Kontraste und mobile Ansichten unterstützen."
+      ],
+      stat: "85%",
+      statSub: "Reduzierung der Einarbeitungszeit neuer Entwickler"
+    }
+  }
+};
+
 export default function Values() {
   const [selectedId, setSelectedId] = useState<string>('agile-engineering');
   const { language, t, getCoreValues } = useLanguage();
@@ -31,75 +101,8 @@ export default function Values() {
     }
   };
 
-  // Secondary technical points based on active value
-  const technicalDeepDives: Record<string, Record<string, { subtitle: string; bullets: string[]; stat: string; statSub: string }>> = {
-    'agile-engineering': {
-      en: {
-        subtitle: "Behind the Architecture: Decoupled Scaling Infrastructure",
-        bullets: [
-          "Self-orchestrating container shards that adjust dynamically during hot traffic spikes.",
-          "Low-overhead load dispatchers optimized for modern kernel thread profiles.",
-          "Declarative platform state engines that instantly roll back failed micro-transactions."
-        ],
-        stat: "14ms",
-        statSub: "P99 Client Query Round-trip Time"
-      },
-      de: {
-        subtitle: "Hinter dem System: Entkoppelte Skalierungskonzepte",
-        bullets: [
-          "Selbstorganisierende Container-Shards, die sich bei Datenverkehrspitzen dynamisch anpassen.",
-          "Sehr schlanke Load-Dispatcher, optimiert für moderne Kernel-Thread-Profile.",
-          "Deklarative Plattform-Zustands-Engines für unmittelbare Rollbacks unvollständiger Mikrotransaktionen."
-        ],
-        stat: "14ms",
-        statSub: "P99 Client Query Latenzzeit"
-      }
-    },
-    'security-first': {
-      en: {
-        subtitle: "Behind the Security: Cryptographic Verification Pillars",
-        bullets: [
-          "Zero-knowledge query layers that protect critical end-user information globally.",
-          "Automatic end-to-end transport layer rotation with cryptographic dual-keys.",
-          "Ongoing background validation audits that trigger alerts on anomalous system queries."
-        ],
-        stat: "AES-GCM",
-        statSub: "256-bit Hardened Hardware Encryption"
-      },
-      de: {
-        subtitle: "Hinter der Sicherheit: Kryptografische Verifizierungssäulen",
-        bullets: [
-          "Zero-Knowledge-Abfrageschichten, die kritische Endnutzerdaten weltweit schützen.",
-          "Zweiseitig verschlüsselte automatische Transportlayer-Zyklen mit rotierenden Schlüsseln.",
-          "Fortlaufende Hintergrundaudits, die bei verdächtigen Systemanfragen Alarm schlagen."
-        ],
-        stat: "AES-GCM",
-        statSub: "256-bit Hardware-gestützte Verschlüsselung"
-      }
-    },
-    'human-centric': {
-      en: {
-        subtitle: "Behind the UX: Redundant-free Interfaces & APIs",
-        bullets: [
-          "Interactive dashboard architectures optimized for lightning-quick cognitive capture.",
-          "Uniform OpenAPI layout blueprints and modular developer tooling templates.",
-          "Accessible visual interfaces supporting high-contrast, text-to-speech, and responsive layouts."
-        ],
-        stat: "85%",
-        statSub: "Reduction in Developer Onboarding Lead Time"
-      },
-      de: {
-        subtitle: "Hinter der UX: Redundanzfreie Oberflächen & APIs",
-        bullets: [
-          "Interaktives Dashboard-Design, optimiert auf schnelles kognitives Erfassen.",
-          "Einheitliche OpenAPI-Blueprints und modulare Entwickler-Toolingtemplates.",
-          "Barrierefreie visuelle Designs, die Vorlesemodus, Kontraste und mobile Ansichten unterstützen."
-        ],
-        stat: "85%",
-        statSub: "Reduzierung der Einarbeitungszeit neuer Entwickler"
-      }
-    },
-    'sustainable-tech': {
+  // Added missing sustainability deep dive data
+  const SUSTAINABLE_DEEP_DIVE = {
       en: {
         subtitle: "Behind the Environment: High-Efficiency Compute Engines",
         bullets: [
@@ -120,10 +123,11 @@ export default function Values() {
         stat: "3.2 MW/h",
         statSub: "Geschätzte vermiedene CO2-Emissionen jährlich"
       }
-    }
   };
 
-  const activeDeepDive = technicalDeepDives[selectedId]?.[language] || technicalDeepDives['agile-engineering']?.[language] || technicalDeepDives['agile-engineering']['en'];
+  const activeDeepDive = selectedId === 'sustainable-tech' 
+    ? SUSTAINABLE_DEEP_DIVE[language] 
+    : (TECHNICAL_DEEP_DIVES[selectedId]?.[language] || TECHNICAL_DEEP_DIVES['agile-engineering']?.[language]);
 
   return (
     <section

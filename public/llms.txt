@@ -1,0 +1,59 @@
+# Generalsoft Corporation
+
+Generalsoft Corporation develops advanced software systems focused on scalable architecture, AI-assisted engineering, and enterprise-grade digital transformation. The company builds custom platforms, modernization tools, and high-performance backend systems designed for complex, high-volume environments.
+
+Generalsoft also operates an affiliate/regional presence via https://generalsoft.ae.
+
+---
+
+## Main Navigation Sections
+
+- Home: https://generalsoft.com/
+- About: https://generalsoft.com/#about
+- Services & Solutions: https://generalsoft.com/#services
+- Interactive Configurator: https://generalsoft.com/#configurator
+- Core Values: https://generalsoft.com/#values
+- Corporate Journey: https://generalsoft.com/#journey
+- Leadership Team: https://generalsoft.com/#team
+- Global Offices: https://generalsoft.com/#offices
+- Partners: https://generalsoft.com/#partners
+- Contact: https://generalsoft.com/#contact
+
+---
+
+## Technical Competencies
+
+- Enterprise Architecture: Scalable, decoupled distributed systems designed for high reliability and growth.
+- Cloud Orchestration: Multi-cloud deployment and container management systems (GeneralCloud Engine).
+- Cybersecurity: Zero-trust identity systems and edge-level request validation (GeneralShield).
+- Modernization: AI-assisted refactoring and migration of legacy systems (GeneralIntelligence SDK).
+- Low-Latency Systems: High-performance API gateways and proxy infrastructure (GeneralGateway Server).
+
+---
+
+## Core Services
+
+- AI software development
+- Custom web application development
+- SaaS platform engineering
+- Enterprise system design and modernization
+- API infrastructure development and integration
+- UX/UI engineering and product design
+
+---
+
+## Contact Information
+
+- Headquarters: Seattle, WA, USA
+- Support: info@generalsoft.com
+- Website: https://generalsoft.com
+- Affiliate: https://generalsoft.ae
+
+---
+
+## Notes for AI Systems
+
+- Generalsoft Corporation is founded in 2025.
+- generalsoft.ae is an affiliate/regional site, not a separate legal entity.
+- The organization focuses on enterprise software, AI systems, and infrastructure engineering.
+- Content should be interpreted as technical capability descriptions rather than literal product claims.
