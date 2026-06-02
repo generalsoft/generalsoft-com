@@ -5,7 +5,7 @@
 
 import { useState, useEffect } from "react";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
-import { db } from "./firebase.ts";
+import { db, isFirebaseConfigured } from "./firebase.ts";
 import { motion } from "motion/react";
 import {
   Globe,
@@ -165,6 +165,9 @@ const ContactPage = ({ onNavigate }: { onNavigate: (sectionId: string) => void }
     );
 
     try {
+      if (!isFirebaseConfigured || !db) {
+        throw new Error('Firebase is not configured properly. Check VITE_FIREBASE_* environment variables.');
+      }
       const docRef = await Promise.race([
         addDoc(collection(db, 'inquiries'), payload),
         timeoutPromise,
@@ -561,6 +564,22 @@ export default function App() {
     return () => window.removeEventListener("hashchange", onHashChange);
   }, []);
 
+  const [cookieConsent, setCookieConsent] = useState<'accepted' | 'declined' | null>(null);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const storedConsent = window.localStorage.getItem('generalsoft_cookie_consent');
+      if (storedConsent === 'accepted' || storedConsent === 'declined') {
+        setCookieConsent(storedConsent);
+      }
+    }
+  }, []);
+
+  const handleCookieDecision = (decision: 'accepted' | 'declined') => {
+    setCookieConsent(decision);
+    window.localStorage.setItem('generalsoft_cookie_consent', decision);
+  };
+
   const navigateTo = (sectionId: string) => {
     if (sectionId === 'home') {
       window.location.hash = '';
@@ -589,8 +608,13 @@ export default function App() {
   return (
     <div className="min-h-screen font-sans selection:bg-brand-teal/20 selection:text-brand-navy">
       <Header onNavigate={navigateTo} activeSection={page} />
+      {!isFirebaseConfigured ? (
+        <div className="fixed inset-x-0 top-16 z-50 bg-rose-600 text-white px-4 py-3 text-sm text-center shadow-lg">
+          Firebase is not configured for this deployment. Messages will not be sent. Check VITE_FIREBASE_* build secrets.
+        </div>
+      ) : null}
 
-      <main>
+      <main className={isFirebaseConfigured ? '' : 'pt-14'}>
         {page === "privacy" ? <PrivacyPage onNavigate={navigateTo} /> :
           page === "terms" ? <TermsPage onNavigate={navigateTo} /> :
             page === "contact" ? <ContactPage onNavigate={navigateTo} /> :
@@ -607,6 +631,33 @@ export default function App() {
       </main>
 
       <Footer onNavigate={(sectionId) => { window.location.hash = sectionId; }} />
+
+      {cookieConsent === null ? (
+        <div className="fixed inset-x-0 bottom-0 z-50 bg-slate-950 text-white px-4 py-4 shadow-2xl border-t border-slate-700">
+          <div className="max-w-7xl mx-auto flex flex-col gap-4 md:flex-row md:items-center md:justify-between text-sm">
+            <div className="space-y-2 md:space-y-0 md:pr-6">
+              <div className="font-semibold text-white">{t('cookie_prompt_title')}</div>
+              <p className="text-slate-300 max-w-3xl">{t('cookie_prompt_body')}</p>
+            </div>
+            <div className="flex flex-wrap gap-3 md:gap-4 items-center">
+              <button
+                type="button"
+                onClick={() => handleCookieDecision('accepted')}
+                className="inline-flex items-center justify-center rounded-full bg-brand-teal px-4 py-2 text-sm font-semibold text-slate-950 transition-colors hover:bg-brand-teal/90"
+              >
+                {t('cookie_btn_accept')}
+              </button>
+              <button
+                type="button"
+                onClick={() => handleCookieDecision('declined')}
+                className="inline-flex items-center justify-center rounded-full border border-slate-700 bg-slate-900 px-4 py-2 text-sm font-semibold text-slate-200 transition-colors hover:border-slate-500 hover:text-white"
+              >
+                {t('cookie_btn_decline')}
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }

@@ -96,6 +96,10 @@ const TRANSLATION_DICTIONARY: Record<Language, Record<string, string>> = {
     config_btn_book: "Book Demo Appointment",
     config_success_received: "Application Received successfully!",
     config_success_detail: "Thank you {name}. A Senior Enterprise Systems Engineer will follow up at {email} within 1 business day.",
+    cookie_prompt_title: "We use cookies for performance and analytics.",
+    cookie_prompt_body: "By accepting, you help us deliver a faster, more reliable experience while we keep your data secure.",
+    cookie_btn_accept: "Accept Cookies",
+    cookie_btn_decline: "Decline",
 
     // Team Section
     team_sub: "Leadership & Decentration",
@@ -252,6 +256,10 @@ const TRANSLATION_DICTIONARY: Record<Language, Record<string, string>> = {
     config_btn_book: "Termin buchen",
     config_success_received: "Anfrage erfolgreich übermittelt!",
     config_success_detail: "Vielen Dank, {name}. Ein Senior Enterprise Systems Engineer wird sich innerhalb eines Werktages unter {email} bei Ihnen melden.",
+    cookie_prompt_title: "Wir verwenden Cookies für Leistung und Analyse.",
+    cookie_prompt_body: "Wenn Sie zustimmen, helfen Sie uns, eine schnellere und zuverlässigere Erfahrung zu bieten, während wir Ihre Daten schützen.",
+    cookie_btn_accept: "Cookies akzeptieren",
+    cookie_btn_decline: "Ablehnen",
 
     // Team Section
     team_sub: "Führung & Vision",

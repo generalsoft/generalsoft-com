@@ -26,5 +26,11 @@ if (missingKeys.length) {
   console.error('Missing Firebase config env vars:', missingKeys.join(', '));
 }
 
-const app = initializeApp(firebaseConfig);
-export const db = getFirestore(app);
+const firebaseConfigured = requiredConfigKeys.every((key) => !!viteEnv[key]);
+if (!firebaseConfigured) {
+  console.error('Missing Firebase config env vars:', missingKeys.join(', '));
+}
+
+const app = firebaseConfigured ? initializeApp(firebaseConfig) : undefined;
+export const db = app ? getFirestore(app) : null;
+export const isFirebaseConfigured = firebaseConfigured;
