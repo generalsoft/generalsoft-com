@@ -8,6 +8,8 @@ import { motion } from 'motion/react';
 import { Terminal, Database, Server, ChevronDown } from 'lucide-react';
 import { useLanguage } from './LanguageContext';
 import heroImage from '../assets/images/generalsoft_hero_1780398091321.png';
+import leaderImage from '../assets/images/abid.jpg';
+
 
 interface HeroProps {
   onExploreClick: () => void;
