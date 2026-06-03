@@ -28,6 +28,7 @@ import InteractiveWidget from "./components/InteractiveWidget.tsx";
 import Offices from "./components/Offices.tsx";
 import Solutions from "./components/Solutions.tsx";
 import Team from "./components/Team.tsx";
+import Careers from "./components/Careers.tsx";
 import Timeline from "./components/Timeline.tsx";
 import Values from "./components/Values.tsx";
 import Footer from "./components/Footer.tsx";
@@ -51,7 +52,7 @@ const LandingPage = () => {
 
   return (
     <>
-      <Hero onExploreClick={() => { window.location.hash = 'about'; }} />
+      <Hero />
 
       {/* Partners Section */}
       <section className="py-12 px-6 bg-white overflow-hidden">
@@ -127,11 +128,11 @@ const LandingPage = () => {
 
       <Timeline />
 
-      <Solutions />
-
       <Team />
 
       <Offices />
+
+      <Careers />
     </>
   );
 };
@@ -140,9 +141,23 @@ const ContactPage = ({ onNavigate }: { onNavigate: (sectionId: string) => void }
   const { t, language } = useLanguage();
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [captcha, setCaptcha] = useState({ q: '', a: 0 });
+  const [userAnswer, setUserAnswer] = useState<string>('');
+
+  useEffect(() => {
+    const n1 = Math.floor(Math.random() * 10) + 1;
+    const n2 = Math.floor(Math.random() * 10) + 1;
+    setCaptcha({ q: `${n1} + ${n2}`, a: n1 + n2 });
+  }, [status]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (parseInt(userAnswer) !== captcha.a) {
+      setSubmitError(t('captcha_error'));
+      setUserAnswer('');
+      return;
+    }
+
     setStatus('sending');
     setSubmitError(null);
     const formData = new FormData(e.currentTarget);
@@ -233,6 +248,17 @@ const ContactPage = ({ onNavigate }: { onNavigate: (sectionId: string) => void }
               <div className="space-y-2">
                 <label className="text-xs font-bold uppercase tracking-widest text-brand-steel">{t('formMsg')}</label>
                 <textarea name="message" rows={4} required className="w-full px-6 py-4 bg-brand-navy/5 rounded-xl border-none focus:ring-2 focus:ring-brand-teal transition-all" />
+              </div>
+              <div className="space-y-2">
+                <label className="text-xs font-bold uppercase tracking-widest text-brand-steel">{t('captcha_label')}</label>
+                <input 
+                  type="number" 
+                  required 
+                  value={userAnswer}
+                  onChange={(e) => setUserAnswer(e.target.value)}
+                  placeholder={t('captcha_placeholder').replace('{q}', captcha.q)}
+                  className="w-full max-w-[180px] px-6 py-4 bg-brand-navy/5 rounded-xl border-none focus:ring-2 focus:ring-brand-teal transition-all" 
+                />
               </div>
               <button
                 type="submit"
@@ -420,7 +446,7 @@ const AboutPage = ({ onNavigate }: { onNavigate: (sectionId: string) => void }) 
 };
 
 const PartnersPage = ({ onNavigate }: { onNavigate: (sectionId: string) => void }) => {
-  const { language } = useLanguage();
+  const { t, language } = useLanguage();
 
   return (
     <section className="min-h-screen pt-24 pb-24 px-6 bg-white" id="partners">
@@ -430,7 +456,7 @@ const PartnersPage = ({ onNavigate }: { onNavigate: (sectionId: string) => void 
           Back to Home
         </button>
 
-        <h2 className="font-display text-3xl font-bold mb-6">Our Partners</h2>
+      <h2 className="font-display text-3xl font-bold mb-6">{t('partners_heading')}</h2>
         <div className="grid md:grid-cols-2 gap-8">
           {PARTNERS.map((p) => (
             <div key={p.name} className="p-6 border rounded-lg bg-white shadow-sm">
@@ -546,6 +572,54 @@ const SLAPage = ({ onNavigate }: { onNavigate: (sectionId: string) => void }) =>
     </div>
   </section>
 );
+
+const SuccessStoriesPage = ({ onNavigate }: { onNavigate: (sectionId: string) => void }) => {
+  const { t, getSuccessStories } = useLanguage();
+  const stories = getSuccessStories();
+
+  return (
+    <section className="min-h-screen pt-24 pb-24 px-6 bg-white" id="success-stories">
+      <div className="max-w-5xl mx-auto">
+        <button onClick={() => onNavigate('home')} className="inline-flex items-center gap-2 text-brand-steel hover:text-brand-navy transition-colors mb-8 text-sm font-medium">
+          <ChevronLeft className="w-4 h-4" />
+          Back to Home
+        </button>
+
+        <h2 className="font-display text-3xl font-bold mb-4">{t('success_stories_title')}</h2>
+        <p className="text-brand-navy/70 leading-relaxed mb-12">{t('success_stories_desc')}</p>
+
+        <div className="space-y-12">
+          {stories.map((story) => (
+            <div key={story.id} className="p-8 border border-brand-steel/10 rounded-2xl bg-slate-50 hover:border-brand-teal/30 transition-all group">
+              <div className="flex flex-wrap items-center justify-between gap-4 mb-4">
+                <h3 className="text-xl font-bold text-brand-navy">{story.title}</h3>
+                <span className="px-3 py-1 bg-brand-navy/5 text-brand-steel text-xs font-mono rounded-full">{story.year}</span>
+              </div>
+              <p className="text-brand-teal font-bold text-sm mb-4 uppercase tracking-wider">{story.client}</p>
+              <p className="text-brand-navy/70 leading-relaxed mb-6">{story.description}</p>
+              
+              <div className="bg-white p-4 rounded-xl border border-brand-steel/5 mb-6">
+                <div className="flex items-center gap-2 text-emerald-600 font-bold text-sm mb-2">
+                  <CheckCircle2 className="w-4 h-4" />
+                  {t('success_stories_outcome')}
+                </div>
+                <p className="text-brand-navy/60 text-sm italic">{story.outcome}</p>
+              </div>
+
+              <div className="flex flex-wrap gap-2">
+                {story.tech.map((tech: string) => (
+                  <span key={tech} className="px-2 py-1 bg-brand-navy/5 text-brand-navy/60 text-[10px] font-mono rounded uppercase">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
 
 export default function App() {
   const [page, setPage] = useState(() => window.location.hash.slice(1) || "home");
@@ -706,6 +780,7 @@ export default function App() {
                         page === 'team' ? <TeamPage onNavigate={navigateTo} /> :
                           page === 'offices' ? <OfficesPage onNavigate={navigateTo} /> :
                             page === 'sla' ? <SLAPage onNavigate={navigateTo} /> :
+                              page === 'success-stories' ? <SuccessStoriesPage onNavigate={navigateTo} /> :
                               page === 'configurator' ? <ConfiguratorPage onNavigate={navigateTo} /> :
                                 <LandingPage />}
       </main>

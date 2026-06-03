@@ -4,9 +4,9 @@
  */
 
 import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
-import { CORE_VALUES, SOLUTIONS, LEADERSHIP, JOBS, MILESTONES, OFFICES } from '../data';
+import { CORE_VALUES, SOLUTIONS, LEADERSHIP, JOBS, MILESTONES, OFFICES, SUCCESS_STORIES } from '../data';
 import { CoreValue, Solution, Leader, JobPost, Milestone, Office } from '../types';
-import abidImage from '../assets/images/abid.jpg';
+import abidImage from '../assets/images/AN-Rotana.jpg';
 
 export type Language = 'en' | 'de';
 
@@ -20,6 +20,7 @@ interface LanguageContextProps {
   getLeaders: () => Leader[];
   getJobs: () => JobPost[];
   getOffices: () => Office[];
+  getSuccessStories: () => any[];
 }
 
 const LanguageContext = createContext<LanguageContextProps | undefined>(undefined);
@@ -41,15 +42,16 @@ const TRANSLATION_DICTIONARY: Record<Language, Record<string, string>> = {
     logo_sub: "Corporation",
 
     // Hero Section
-    hero_badge: "Empowering Global Enterprises Since 2014",
+    hero_badge: "Empowering Global Enterprises Since 1998",
     hero_title_1: "Autonomous Enterprise Systems.",
     hero_title_2: "Cloud Orchestration & Longevity.",
     hero_desc: "Generalsoft Corporation pioneers fault-tolerant custom operating layers, high-volume transactional pipelines, and autonomous AI-driven architecture modernization systems that enable global enterprises to scale without fear of obsolescence.",
     hero_cta_mission: "Explore Company Mission",
     hero_cta_careers: "View Careers",
-    hero_stat_clients: "Enterprise Clients",
-    hero_stat_sla: "SLA Guarantee",
-    hero_stat_transacted: "Projects Delivered",
+    hero_stat_experience: "28 years Experience",
+    hero_stat_completed: "100+ projects completed",
+    hero_stat_licensed: "Fully Licensed",
+    hero_stat_insured: "Fully Insured",
     hero_sys_secure: "SYSTEM SECURE AND STABLE",
     hero_scroll: "Scroll to Explore",
 
@@ -150,11 +152,15 @@ const TRANSLATION_DICTIONARY: Record<Language, Record<string, string>> = {
     modal_label_portfolio: "GitHub / Portfolio URI (Optional)",
     modal_label_resume: "Candidate Resume Document Attachment",
     modal_resume_browse: "Browse...",
+    modal_resume_none: "No file selected",
     modal_placeholder_cover: "Tell us about a time you optimized database query layouts, wrote a compiler parser, or modernization system...",
     modal_btn_cancel: "Cancel",
     modal_btn_submit: "Submit Core Application",
     modal_success_title: "Pitch Received, {name}!",
     modal_success_desc: "Your application for {jobTitle} has been logged directly inside the Generalsoft recruitment hub. We will verify your file details against our engineering guidelines.",
+    captcha_label: "Security Challenge",
+    captcha_placeholder: "What is {q}?",
+    captcha_error: "Verification failed. Please try again.",
     modal_success_hr_title: "Automatic HR Event Scheduling",
     modal_success_hr_desc: "We utilize immediate developer triage calendars. A calendar invite coordinates meeting setups via {email} within 12 hours.",
     modal_btn_exit: "Exit Application",
@@ -168,7 +174,8 @@ const TRANSLATION_DICTIONARY: Record<Language, Record<string, string>> = {
     footer_privacy: "Privacy Policy",
     footer_security: "Terms of Service",
     footer_sla: "generalsoft.com SLA Terms",
-    partners: "Global Partners",
+    partners: "Representing Globally...",
+    partners_heading: "We retail, customize and extend software from ...",
     since: "ESTD. 1998 // SEATTLE, WA",
     ai: "Artificial Intelligence",
     cyber: "Cybersecurity",
@@ -187,6 +194,13 @@ const TRANSLATION_DICTIONARY: Record<Language, Record<string, string>> = {
     formSuccess: "Thank you! We'll be in touch soon.",
     tagline: "Custom Software Development",
     heroSub: "Generalsoft Corporation builds tailored digital experiences for global markets. From USA to the world, we design software that works for you."
+    ,
+    error_file_too_large: "File is too large. Maximum size is 10MB.",
+    error_timeout: "Submission timed out. Please check your connection and try again.",
+    btn_uploading: "Uploading...",
+    success_stories_title: "Success Stories",
+    success_stories_desc: "Real-world impact through engineering excellence. All projects listed below were delivered on time, on budget, and to the highest technical standards.",
+    success_stories_outcome: "Outcome & Value"
   },
   de: {
     // Nav / Header
@@ -203,15 +217,16 @@ const TRANSLATION_DICTIONARY: Record<Language, Record<string, string>> = {
     logo_sub: "Aktiengesellschaft",
 
     // Hero Section
-    hero_badge: "Globale Unternehmen stärken seit 2014",
+    hero_badge: "Globale Unternehmen stärken seit 1998",
     hero_title_1: "Autonome Enterprise-Systeme.",
     hero_title_2: "Cloud-Orchestrierung & Langlebigkeit.",
     hero_desc: "Die Generalsoft Corporation leistet Pionierarbeit bei ausfallsicheren Betriebssystemschichten, hochvolumigen Transaktionspipelines und autonomen KI-gesteuerten Systemmodernisierungen, die es globalen Unternehmen ermöglichen, ohne Angst vor Veraltung zu skalieren.",
     hero_cta_mission: "Unternehmensmission erkunden",
     hero_cta_careers: "Offene Stellen ansehen",
-    hero_stat_clients: "Unternehmenskunden",
-    hero_stat_sla: "SLA-Garantie",
-    hero_stat_transacted: "Projekte Bereitgestellt",
+    hero_stat_experience: "28 Jahre Erfahrung",
+    hero_stat_completed: "100+ abgeschlossene Projekte",
+    hero_stat_licensed: "Vollständig lizenziert",
+    hero_stat_insured: "Vollständig versichert",
     hero_sys_secure: "SYSTEM SICHER UND STABIL",
     hero_scroll: "Scrollen zum Erkunden",
 
@@ -312,11 +327,15 @@ const TRANSLATION_DICTIONARY: Record<Language, Record<string, string>> = {
     modal_label_portfolio: "GitHub / Portfolio-Link (optional)",
     modal_label_resume: "Lebenslauf anhängen / hochladen",
     modal_resume_browse: "Durchsuchen...",
+    modal_resume_none: "Keine Datei ausgewählt",
     modal_placeholder_cover: "Beschreiben Sie kurz ein Projekt, bei dem Sie komplexe Datenbanken optimiert, Compiler geschrieben oder Altsysteme migriert haben...",
     modal_btn_cancel: "Abbrechen",
     modal_btn_submit: "Bewerbungsunterlagen einreichen",
     modal_success_title: "Bewerbung erhalten, {name}!",
     modal_success_desc: "Ihre Bewerbung als {jobTitle} wurde direkt im Generalsoft-Rekrutierungsportal registriert. Wir prüfen Ihre Unterlagen sorgfältig anhand unserer technischen Qualitätsrichtlinien.",
+    captcha_label: "Sicherheitsprüfung",
+    captcha_placeholder: "Was ist {q}?",
+    captcha_error: "Prüfung fehlgeschlagen. Bitte erneut versuchen.",
     modal_success_hr_title: "Automatische Erstgesprächs-Planung",
     modal_success_hr_desc: "Wir verwenden automatisierte Entwickler-Vorauswahl-Kalender. Eine Einladung zu einem Online-Gespräch erhalten Sie an {email} innerhalb der nächsten 12 Stunden.",
     modal_btn_exit: "Schließen",
@@ -330,7 +349,8 @@ const TRANSLATION_DICTIONARY: Record<Language, Record<string, string>> = {
     footer_privacy: "Datenschutzerklärung",
     footer_security: "Nutzungsbedingungen",
     footer_sla: "generalsoft.com SLA-Bedingungen",
-    partners: "Globale Partner",
+    partners: "Weltweite Repräsentanz...",
+    partners_heading: "Wir vertreiben, passen an und erweitern Software von ...",
     since: "GEGRÜNDET 1998 // USA",
     ai: "Künstliche Intelligenz",
     cyber: "Cybersicherheit",
@@ -348,7 +368,13 @@ const TRANSLATION_DICTIONARY: Record<Language, Record<string, string>> = {
     formSubmit: "Nachricht senden",
     formSuccess: "Vielen Dank! Wir melden uns in Kürze.",
     tagline: "Individuelle Softwareentwicklung",
-    heroSub: "Generalsoft Corporation erstellt maßgeschneiderte digitale Erlebnisse für globale Märkte. Von USA in die Welt – wir entwickeln Software, die für Sie arbeitet."
+    heroSub: "Generalsoft Corporation erstellt maßgeschneiderte digitale Erlebnisse für globale Märkte. Von USA in die Welt – wir entwickeln Software, die für Sie arbeitet.",
+    error_file_too_large: "Datei ist zu groß. Maximale Größe ist 10MB.",
+    error_timeout: "Zeitüberschreitung. Bitte prüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
+    btn_uploading: "Wird hochgeladen...",
+    success_stories_title: "Erfolgsgeschichten",
+    success_stories_desc: "Reale Auswirkungen durch exzellentes Engineering. Alle unten aufgeführten Projekte wurden pünktlich, im Rahmen des Budgets und nach höchsten technischen Standards geliefert.",
+    success_stories_outcome: "Ergebnis & Mehrwert"
   }
 };
 
@@ -550,6 +576,46 @@ const JOBS_DE: JobPost[] = [
   }
 ];
 
+// Localized success stories mapper
+const SUCCESS_STORIES_DE = [
+  {
+    id: "eai-transformation",
+    title: "Globale EAI- & ERP-Transformation",
+    client: "Fortune-500-Fertigungsunternehmen",
+    year: "2004",
+    description: "Architektur einer massiven Enterprise Application Integration (EAI)-Schicht, die verschiedene veraltete ERP-Systeme mit modernen CRM-Plattformen in 12 globalen Regionen verbindet. Das Projekt konzentrierte sich auf die Auflösung von Datensilos.",
+    outcome: "Projekt 15 % vor dem Zeitplan und 10 % unter dem Budget geliefert. Erzielte eine 45-prozentige Reduzierung der abteilungsübergreifenden Datenlatenz.",
+    tech: ["WebMethods", "Oracle ERP", "Salesforce", "Java EE"]
+  },
+  {
+    id: "cloud-orch-msft",
+    title: "Hyperscale Cloud-Orchestrierungs-Framework",
+    client: "Großes Softwareunternehmen (Washington State)",
+    year: "2010",
+    description: "Leitung der Entwicklung einer resilienten Cloud-Orchestrierungsschicht zur Verwaltung massiver Container-Flotten. Dieses System nutzte Telemetrie-Hooks für vorausschauende Skalierung.",
+    outcome: "Streng im Rahmen des Budgets innerhalb eines 12-monatigen Forschungs- und Entwicklungsfensters geliefert. Das Framework wurde zur Basiskomponente für das Management regionaler Rechenzentren.",
+    tech: ["C#", ".NET Core", "Verteilte Systeme", "Hyper-V"]
+  },
+  {
+    id: "fintech-security",
+    title: "Zero-Trust Infrastruktur-Härtung",
+    client: "Globaler Finanzdienstleister",
+    year: "2020",
+    description: "Entwicklung einer kryptografisch prüfbaren Zero-Trust-Sicherheitsebene für eine verteilte Hochfrequenz-Handelsplattform. Die Implementierung stellte die Datenintegrität ohne Latenz-Overhead sicher.",
+    outcome: "Pünktlich und im Rahmen des Budgets geliefert. Führte nach dem Deployment zu null kritischen Sicherheitsvorfällen und gewann den CyberSecurity Excellence Award.",
+    tech: ["Rust", "AES-GCM", "gRPC", "Kubernetes"]
+  },
+  {
+    id: "ai-modernization",
+    title: "Modernisierungs-Engine für Legacy-Code",
+    client: "Enterprise Logistics Group",
+    year: "2024",
+    description: "Entwicklung einer KI-gestützten Pipeline mit kundenspezifischer Compiler-Logik, um über 2 Millionen Zeilen alten COBOL/Java 6 Code in modulare TypeScript- und Rust-Komponenten zu überführen.",
+    outcome: "Erfolgreicher Übergang des gesamten Kernsystems 2 Monate schneller als vorhergesagt, 5 % unter dem zugewiesenen Budget.",
+    tech: ["Python/PyTorch", "Rust", "TypeScript", "LLM-Finetuning"]
+  }
+];
+
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   // Initialize with 'en' but try to read from localstorage or browser preference
   const [language, setLanguageState] = useState<Language>(() => {
@@ -596,6 +662,10 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
     return OFFICES;
   };
 
+  const getSuccessStories = () => {
+    return language === 'de' ? SUCCESS_STORIES_DE : SUCCESS_STORIES;
+  };
+
   return (
     <LanguageContext.Provider value={{
       language,
@@ -606,7 +676,8 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
       getSolutions,
       getLeaders,
       getJobs,
-      getOffices
+      getOffices,
+      getSuccessStories
     }}>
       {children}
     </LanguageContext.Provider>
