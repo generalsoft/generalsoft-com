@@ -8,34 +8,120 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Briefcase, MapPin, Clock, ArrowRight, X, FileText, CheckCircle2, User, Mail, Link as LinkIcon, AlertCircle } from 'lucide-react';
 import { useLanguage } from './LanguageContext';
 import { JobPost } from '../types';
+import { db, storage, isFirebaseConfigured } from '../firebase.ts';
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+
+const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
 
 export default function Careers() {
   const { language, t, getJobs } = useLanguage();
   const jobsList = getJobs();
   const [selectedJob, setSelectedJob] = useState<JobPost | null>(null);
   const [applySubmitted, setApplySubmitted] = useState<boolean>(false);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [captcha, setCaptcha] = useState({ q: '', a: 0 });
+  const [userAnswer, setUserAnswer] = useState<string>('');
   
   // Application Form States
   const [candName, setCandName] = useState<string>('');
   const [candEmail, setCandEmail] = useState<string>('');
-  const [candResume, setCandResume] = useState<string>('resume.pdf');
+  const [candResume, setCandResume] = useState<string>('');
+  const [resumeFile, setResumeFile] = useState<File | null>(null);
   const [candCoverLetter, setCandCoverLetter] = useState<string>('');
   const [candGithub, setCandGithub] = useState<string>('');
   const [isDragging, setIsDragging] = useState<boolean>(false);
 
+  const generateCaptcha = () => {
+    const n1 = Math.floor(Math.random() * 10) + 1;
+    const n2 = Math.floor(Math.random() * 10) + 1;
+    setCaptcha({ q: `${n1} + ${n2}`, a: n1 + n2 });
+    setUserAnswer('');
+  };
+
   const handleOpenApply = (job: JobPost) => {
     setSelectedJob(job);
     setApplySubmitted(false);
+    setIsSubmitting(false);
+    setSubmitError(null);
+    generateCaptcha();
   };
 
   const handleCloseApply = () => {
     setSelectedJob(null);
   };
 
-  const handleSubmitApply = (e: React.FormEvent) => {
+  const handleSubmitApply = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (candName && candEmail && candCoverLetter) {
+    if (!candName || !candEmail || !candCoverLetter || !selectedJob) return;
+
+    if (parseInt(userAnswer) !== captcha.a) {
+      setSubmitError(t('captcha_error'));
+      generateCaptcha();
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    if (resumeFile && resumeFile.size > MAX_FILE_SIZE) {
+      setSubmitError(t('error_file_too_large'));
+      setIsSubmitting(false);
+      return;
+    }
+
+    // Increase timeout for file uploads to 90 seconds, 
+    // or 15 seconds if it's just a text submission.
+    const timeoutDuration = resumeFile ? 90000 : 15000;
+    const timeoutPromise = new Promise<never>((_, reject) =>
+      window.setTimeout(() => reject(new Error(t('error_timeout'))), timeoutDuration)
+    );
+
+    try {
+      if (!isFirebaseConfigured || !db || !storage) {
+        throw new Error('Firebase is not configured properly.');
+      }
+
+      const submissionLogic = async () => {
+        let resumeUrl = '';
+        if (resumeFile) {
+          // Step 1: Binary Upload to Storage
+          const storageRef = ref(storage, `resumes/${Date.now()}_${resumeFile.name}`);
+          const uploadResult = await uploadBytes(storageRef, resumeFile);
+          // Step 2: Get the download URL for the record
+          resumeUrl = await getDownloadURL(uploadResult.ref);
+        }
+
+        const payload = {
+          jobId: selectedJob.id,
+          jobTitle: selectedJob.title,
+          candidateName: candName,
+          candidateEmail: candEmail,
+          portfolioUrl: candGithub,
+          resumeFilename: candResume,
+          resumeUrl,
+          coverLetter: candCoverLetter,
+          language,
+          timestamp: serverTimestamp(),
+        };
+
+        // Step 3: Save metadata to Firestore
+        await addDoc(collection(db, 'job_applications'), payload);
+      };
+
+      await Promise.race([submissionLogic(), timeoutPromise]);
       setApplySubmitted(true);
+    } catch (err) {
+      const error = err as { code?: string; message?: string };
+      console.error('Detailed Submission Error:', error);
+      if (error.code === 'storage/unauthorized' || error.code === 'permission-denied' || error.code === 'storage/retry-limit-exceeded') {
+        setSubmitError('Security Rules Error: Please check Firebase permissions.');
+      } else {
+        setSubmitError(error.message || t('error_timeout'));
+      }
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -53,13 +139,17 @@ export default function Careers() {
     e.preventDefault();
     setIsDragging(false);
     if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-      setCandResume(e.dataTransfer.files[0].name);
+      const file = e.dataTransfer.files[0];
+      setCandResume(file.name);
+      setResumeFile(file);
     }
   };
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
-      setCandResume(e.target.files[0].name);
+      const file = e.target.files[0];
+      setCandResume(file.name);
+      setResumeFile(file);
     }
   };
 
@@ -268,7 +358,9 @@ export default function Careers() {
                           >
                             <div className="flex items-center gap-2">
                               <FileText className="w-4.5 h-4.5 text-indigo-500 shrink-0" />
-                              <span className="font-mono text-[10px] text-slate-700 truncate max-w-[150px] font-semibold">{candResume}</span>
+                              <span className="font-mono text-[10px] text-slate-700 truncate max-w-[150px] font-semibold">
+                                {candResume || t('modal_resume_none')}
+                              </span>
                             </div>
                             <label className="px-2.5 py-1.5 rounded-lg bg-slate-50 hover:bg-slate-100 hover:text-slate-900 border border-slate-200 font-sans text-[9px] uppercase tracking-wider shrink-0 cursor-pointer text-slate-600 font-bold">
                               {t('modal_resume_browse')}
@@ -298,6 +390,28 @@ export default function Careers() {
                         />
                       </div>
 
+                      {/* Captcha */}
+                      <div className="pt-2">
+                        <label className="block font-sans font-bold text-[10px] text-slate-400 uppercase tracking-wider mb-2">
+                          {t('captcha_label')}
+                        </label>
+                        <input
+                          type="number"
+                          required
+                          value={userAnswer}
+                          onChange={(e) => setUserAnswer(e.target.value)}
+                          placeholder={t('captcha_placeholder').replace('{q}', captcha.q)}
+                          className="w-full max-w-[150px] px-4 py-2.5 bg-slate-50 text-slate-800 text-xs rounded-xl border border-slate-205 focus:ring-1 focus:ring-indigo-600 focus:outline-none font-bold"
+                        />
+                      </div>
+
+                      {submitError && (
+                        <div className="flex items-center gap-2 text-red-600 text-[10px] font-bold uppercase tracking-wider">
+                          <AlertCircle className="w-3 h-3" />
+                          {submitError}
+                        </div>
+                      )}
+
                       {/* CTA Panel */}
                       <div className="border-t border-slate-100 pt-6 flex justify-end gap-3">
                         <button
@@ -309,9 +423,10 @@ export default function Careers() {
                         </button>
                         <button
                           type="submit"
-                          className="px-6 py-2.5 rounded-lg bg-indigo-600 hover:bg-slate-900 text-white font-sans text-xs font-semibold tracking-wider cursor-pointer active:scale-97 transition-all shadow-sm"
+                          disabled={isSubmitting}
+                          className={`px-6 py-2.5 rounded-lg text-white font-sans text-xs font-semibold tracking-wider cursor-pointer active:scale-97 transition-all shadow-sm ${isSubmitting ? 'bg-slate-400 cursor-wait' : 'bg-indigo-600 hover:bg-slate-900'}`}
                         >
-                          {t('modal_btn_submit')}
+                          {isSubmitting ? (resumeFile ? t('btn_uploading') : '...') : t('modal_btn_submit')}
                         </button>
                       </div>
                     </form>

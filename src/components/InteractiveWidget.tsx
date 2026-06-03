@@ -21,6 +21,8 @@ export default function InteractiveWidget() {
   const [bookingError, setBookingError] = useState<string | null>(null);
   const [demoName, setDemoName] = useState<string>('');
   const [demoEmail, setDemoEmail] = useState<string>('');
+  const [captcha, setCaptcha] = useState({ q: '', a: 0 });
+  const [userAnswer, setUserAnswer] = useState<string>('');
 
   const industries = [
     { id: 'fintech', label: language === 'de' ? 'Finanzwesen & FinTech' : 'Finance & FinTech', icon: '🏦' },
@@ -72,6 +74,9 @@ export default function InteractiveWidget() {
 
   const handleGenerate = () => {
     if (industry && scale && bottleneck) {
+      const n1 = Math.floor(Math.random() * 10) + 1;
+      const n2 = Math.floor(Math.random() * 10) + 1;
+      setCaptcha({ q: `${n1} + ${n2}`, a: n1 + n2 });
       setShowResult(true);
     }
   };
@@ -82,11 +87,21 @@ export default function InteractiveWidget() {
     setBottleneck('');
     setShowResult(false);
     setBookingSubmitted(false);
+    setUserAnswer('');
   };
 
   const handleDemoSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!demoName || !demoEmail) return;
+
+    if (parseInt(userAnswer) !== captcha.a) {
+      setBookingError(t('captcha_error'));
+      const n1 = Math.floor(Math.random() * 10) + 1;
+      const n2 = Math.floor(Math.random() * 10) + 1;
+      setCaptcha({ q: `${n1} + ${n2}`, a: n1 + n2 });
+      setUserAnswer('');
+      return;
+    }
 
     setBookingState('sending');
     setBookingError(null);
@@ -354,6 +369,18 @@ export default function InteractiveWidget() {
                           onChange={(e) => setDemoEmail(e.target.value)}
                           placeholder={t('config_field_email')}
                           className="px-4 py-3 bg-white text-slate-800 rounded-lg border border-slate-200 text-xs focus:ring-1 focus:ring-indigo-600 focus:outline-none placeholder:text-slate-400 font-semibold"
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <label className="block font-sans font-bold text-[10px] text-slate-450 uppercase tracking-widest">{t('captcha_label')}</label>
+                        <input 
+                          type="number" 
+                          required 
+                          value={userAnswer}
+                          onChange={(e) => setUserAnswer(e.target.value)}
+                          placeholder={t('captcha_placeholder').replace('{q}', captcha.q)}
+                          className="w-full max-w-[150px] px-4 py-3 bg-white text-slate-800 rounded-lg border border-slate-200 text-xs focus:ring-1 focus:ring-indigo-600 focus:outline-none font-bold" 
                         />
                       </div>
                       

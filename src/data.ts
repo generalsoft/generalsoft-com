@@ -4,7 +4,7 @@
  */
 
 import { Milestone, CoreValue, Leader, Solution, Office, JobPost } from './types';
-import abidImage from './assets/images/abid.jpg';
+import abidImage from './assets/images/AN-Rotana.jpg';
 
 export const MILESTONES: Milestone[] = [
   {
@@ -262,5 +262,44 @@ export const PARTNERS = [
     description_de: "Entwicklung datenintensiver Anwendungen, die auf Oracles marktführenden Datenbanksystemen und Cloud-ERP-Lösungen basieren.",
     type: "Member",
     type_de: "Mitglied"
+  }
+];
+
+export const SUCCESS_STORIES = [
+  {
+    id: "eai-transformation",
+    title: "Global EAI & ERP Transformation",
+    client: "Fortune 500 Manufacturing Corp",
+    year: "2004",
+    description: "Architected a massive Enterprise Application Integration (EAI) layer connecting disparate legacy ERP systems with modern CRM platforms across 12 global regions. The project focused on breaking data silos and enabling real-time supply chain visibility.",
+    outcome: "Project delivered 15% ahead of schedule and 10% under budget. Achieved a 45% reduction in cross-departmental data latency and received high-praise for structural longevity.",
+    tech: ["WebMethods", "Oracle ERP", "Salesforce", "Java EE"]
+  },
+  {
+    id: "cloud-orch-msft",
+    title: "Hyperscale Cloud Orchestration Framework",
+    client: "Major Software Company (WA State)",
+    year: "2010",
+    description: "Led the development of a resilient cloud orchestration layer designed to manage massive container fleets. This system utilized custom telemetry hooks to predictively scale resources before traffic spikes occurred.",
+    outcome: "Delivered strictly on budget within an aggressive 12-month R&D window. The framework became a foundational component for the client's regional data center management.",
+    tech: ["C#", ".NET Core", "Distributed Systems", "Hyper-V"]
+  },
+  {
+    id: "fintech-security",
+    title: "Zero-Trust Infrastructure Hardening",
+    client: "Global Financial Services Provider",
+    year: "2020",
+    description: "Engineered a cryptographically auditable zero-trust security layer for a distributed high-frequency trading platform. The implementation ensured data integrity without introducing P99 latency overhead.",
+    outcome: "Delivered on time and on budget. Resulted in zero critical breach incidents post-deployment and won the CyberSecurity Excellence Award.",
+    tech: ["Rust", "AES-GCM", "gRPC", "Kubernetes"]
+  },
+  {
+    id: "ai-modernization",
+    title: "Legacy Code Modernization Engine",
+    client: "Enterprise Logistics Group",
+    year: "2024",
+    description: "Developed an AI-assisted pipeline using custom compiler logic to refactor over 2 million lines of legacy COBOL/Java 6 code into modular, cloud-native TypeScript and Rust components.",
+    outcome: "Successfully transitioned the entire core system 2 months faster than predicted, remaining 5% under the allocated transformation budget.",
+    tech: ["Python/PyTorch", "Rust", "TypeScript", "LLM Fine-tuning"]
   }
 ];

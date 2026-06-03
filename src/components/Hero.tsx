@@ -5,17 +5,12 @@
 
 import React from 'react';
 import { motion } from 'motion/react';
-import { Terminal, Database, Server, ChevronDown } from 'lucide-react';
+import { Terminal, Database, Server, ChevronDown, CheckCircle2 } from 'lucide-react';
 import { useLanguage } from './LanguageContext';
 import heroImage from '../assets/images/generalsoft_hero_1780398091321.png';
-import leaderImage from '../assets/images/abid.jpg';
+import leaderImage from '../assets/images/AN-Rotana.jpg';
 
-
-interface HeroProps {
-  onExploreClick: () => void;
-}
-
-export default function Hero({ onExploreClick }: HeroProps) {
+export default function Hero() {
   const { t } = useLanguage();
 
   return (
@@ -64,48 +59,28 @@ export default function Hero({ onExploreClick }: HeroProps) {
             {t('hero_desc')}
           </motion.p>
 
-          {/* CTAs */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="mt-10 flex flex-wrap gap-4 items-center"
-          >
-            <button
-              onClick={onExploreClick}
-              className="px-6 py-3.5 rounded-full bg-indigo-600 hover:bg-slate-900 text-white font-sans text-xs font-semibold tracking-wider uppercase shadow-md shadow-indigo-600/10 hover:shadow-indigo-600/20 active:scale-97 cursor-pointer transition-all duration-200"
-            >
-              {t('hero_cta_mission')}
-            </button>
-            <button
-              onClick={() => {
-                const target = document.getElementById('careers');
-                if (target) target.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className="px-6 py-3.5 rounded-full bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 font-sans text-xs font-semibold tracking-wider uppercase active:scale-97 cursor-pointer transition-all duration-200 shadow-sm"
-            >
-              {t('hero_cta_careers')}
-            </button>
-          </motion.div>
-
           {/* Quick Stats Grid */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="mt-14 w-full grid grid-cols-3 gap-4 border-t border-slate-100 pt-8"
+            className="mt-10 w-full flex flex-wrap gap-y-3 gap-x-6 border-t border-slate-100 pt-6"
           >
-            <div>
-              <span className="block font-sans font-extrabold text-2xl md:text-3xl text-slate-900">400+</span>
-              <span className="block font-sans text-[10px] text-slate-450 uppercase tracking-widest mt-1 font-semibold">{t('hero_stat_clients')}</span>
+            <div className="flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-indigo-600" />
+              <span className="font-sans text-[11px] text-slate-600 font-bold uppercase tracking-wider">{t('hero_stat_completed')}</span>
             </div>
-            <div>
-              <span className="block font-sans font-extrabold text-2xl md:text-3xl text-indigo-600">99.999%</span>
-              <span className="block font-sans text-[10px] text-slate-450 uppercase tracking-widest mt-1 font-semibold">{t('hero_stat_sla')}</span>
+            <div className="flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-indigo-600" />
+              <span className="font-sans text-[11px] text-slate-600 font-bold uppercase tracking-wider">{t('hero_stat_experience')}</span>
             </div>
-            <div>
-              <span className="block font-sans font-extrabold text-2xl md:text-3xl text-violet-600">$300M+</span>
-              <span className="block font-sans text-[10px] text-slate-450 uppercase tracking-widest mt-1 font-semibold">{t('hero_stat_transacted')}</span>
+            <div className="flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-indigo-600" />
+              <span className="font-sans text-[11px] text-slate-600 font-bold uppercase tracking-wider">{t('hero_stat_licensed')}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-indigo-600" />
+              <span className="font-sans text-[11px] text-slate-600 font-bold uppercase tracking-wider">{t('hero_stat_insured')}</span>
             </div>
           </motion.div>
         </div>
