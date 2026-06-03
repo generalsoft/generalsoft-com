@@ -355,21 +355,39 @@ const TRANSLATION_DICTIONARY: Record<Language, Record<string, string>> = {
 // Localized milestones mapper
 const MILESTONES_DE: Milestone[] = [
   {
-    year: "2014",
+    year: "1998",
     title: "Die Entstehung",
-    description: "Generalsoft wurde im Silicon Valley von einer Gruppe von Systemarchitekten gegründet, die komplexe verteilte Unternehmensumgebungen vereinfachen wollten.",
+    description: "Generalsoft wurde in Kalifornien von einem Enterprise-Architekten mit der Vision gegründet, die Anwendungsintegration zu transformieren.",
     category: "foundation"
   },
   {
+    year: "2004",
+    title: "Einführung von Enterprise-Lösungen",
+    description: "Bereitstellung von EAI-Lösungen für Fortune-500-Unternehmen. Implementierung zahlreicher Enterprise-Integration-Lösungen für namhafte ERP- und CRM-Produkte.",
+    category: "innovation"
+  },
+  {
+    year: "2010",
+    title: "Gründung des Innovationszentrums",
+    description: "Die Generalsoft Corporation hat ein Innovationszentrum im Bundesstaat Washington eingerichtet, um mit einem großen Softwareunternehmen zusammenzuarbeiten und die Forschung und Entwicklung zu beschleunigen.",
+    category: "global"
+  },
+  {
+    year: "2014",
+    title: "EAI-Marktführerschaft",
+    description: "Generalsoft hat sich als führender Anbieter von Enterprise Application Integration (EAI)-Lösungen etabliert und betreut Fortune-500-Unternehmen in den gesamten Vereinigten Staaten.",
+    category: "innovation"
+  },
+  {
     year: "2016",
-    title: "GeneralCloud v1.0",
-    description: "Einführung unserer Flaggschiff-Cloud-Orchestrierungssuite, die ein nahtloses Multi-Cloud-Mapping bei einer Latenzreduzierung von 40% ermöglicht.",
+    title: "Modernisierung & Anerkennung",
+    description: "Generalsoft führte eine Reihe von Projekten zur Technologiemodernisierung und Transformation der Systemlandschaft durch und erhielt von großen Softwareunternehmen Branchenanerkennung für seine technische Expertise und erfolgreiche Projektabwicklung.",
     category: "innovation"
   },
   {
     year: "2018",
     title: "Ausbau der globalen Präsenz",
-    description: "Eröffnung regionaler Hauptsitze in Frankfurt am Main und Tokio, Japan, wodurch weltweit über 200 Fortune-500-Unternehmenskunden gewonnen werden konnten.",
+    description: "Generalsoft weitete seine globale Präsenz durch die Einrichtung strategischer Lieferzentren und die Stärkung seiner Präsenz in wichtigen internationalen Märkten aus, was einen nahtlosen Support für Kunden weltweit ermöglicht.",
     category: "global"
   },
   {
@@ -380,9 +398,9 @@ const MILESTONES_DE: Milestone[] = [
   },
   {
     year: "2023",
-    title: "Series-D & KI-Engine-Initiative",
-    description: "Sicherung einer Series-D-Finanzierung in Höhe von 150 Mio. USD unter der Leitung führender Investoren; Gründung des Generalsoft AI Research Lab in Zürich.",
-    category: "ipo"
+    title: "Plattformübergreifendes Engineering",
+    description: "Generalsoft stärkte seine plattformübergreifenden Engineering-Fähigkeiten und ermöglichte die Bereitstellung in den Bereichen Web, Mobile, IoT, Spielumgebungen, Wearable-Technologien und immersive XR-Systeme, einschließlich Virtual-Reality-Visieren.",
+    category: "innovation"
   },
   {
     year: "2026",

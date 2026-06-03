@@ -10,37 +10,37 @@ export const MILESTONES: Milestone[] = [
   {
     year: "1998",
     title: "Foundation",
-    description: "Generalsoft Corporation founded in Seattle, Washington by a collective of enterprise systems architects with a vision to modernize distributed computing.",
+    description: "Generalsoft was founded in California by an enterprise architect with a vision to transfer application integration.",
     category: "foundation"
   },
   {
     year: "2004",
     title: "Enterprise Solutions Launch",
-    description: "Pioneered the first unified middleware platform for heterogeneous legacy system integration, serving 50+ Fortune 1000 clients.",
+    description: "Provided EAI solutions to Fortune 500 companies. Deployed several Enterprise Integration solutions for several name brand ERP and CRM products.",
     category: "innovation"
   },
   {
     year: "2010",
-    title: "Silicon Valley Expansion",
-    description: "Established innovation hub in Silicon Valley; acquired three specialized middleware vendors to accelerate platform consolidation.",
+    title: "R&D Hub Establishment",
+    description: "Generalsoft Corporation established an innovation hub in Washington State to collaborate with a major software company and accelerate research and development.",
     category: "global"
   },
   {
     year: "2014",
-    title: "Cloud Architecture Evolution",
-    description: "Released GeneralCloud v0.5 with container orchestration capabilities; partnered with major cloud providers for native integration.",
+    title: "EAI Market Leadership",
+    description: "Generalsoft had established itself as a leading Enterprise Application Integration (EAI) solutions provider, serving Fortune 500 companies across the United States.",
     category: "innovation"
   },
   {
     year: "2016",
-    title: "GeneralCloud v1.0",
-    description: "Launched our flagship Cloud Orchestration suite, enabling seamless multi-cloud resource mapping with a 40% reduction in latency.",
+    title: "Modernization & Recognition",
+    description: "Generalsoft executed a series of technology modernization and landscape transformation projects, receiving industry recognition from major software companies for its technical expertise and successful project delivery.",
     category: "innovation"
   },
   {
     year: "2018",
     title: "Global Footprint Expansion",
-    description: "Opened regional headquarters in Frankfurt, Germany and Tokyo, Japan, securing 200+ Fortune 500 enterprise customers global-wide.",
+    description: "Generalsoft expanded its global footprint by establishing strategic delivery centers and strengthening its presence across key international markets, enabling seamless support for customers worldwide.",
     category: "global"
   },
   {
@@ -51,9 +51,9 @@ export const MILESTONES: Milestone[] = [
   },
   {
     year: "2023",
-    title: "Series D & AI-Engine Initiative",
-    description: "Secured $150M Series D funding led by premier venture firms; established the Generalsoft AI Research Lab in Zurich focusing on generative automation.",
-    category: "ipo"
+    title: "Cross-Platform Engineering",
+    description: "Generalsoft strengthened its cross-platform engineering capabilities, enabling deployment across web, mobile, IoT, gaming environments, wearable technologies, and immersive XR systems including virtual reality visors.",
+    category: "innovation"
   },
   {
     year: "2026",
