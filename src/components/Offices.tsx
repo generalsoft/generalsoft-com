@@ -170,7 +170,7 @@ export default function Offices() {
                   <div>
                     <span className="block font-sans text-[10px] text-slate-450 uppercase tracking-widest font-semibold">{t('offices_location')}</span>
                     <span className="block font-sans text-xs sm:text-sm text-slate-700 mt-1 font-normal leading-normal">
-                      {activeOffice.city} Corporate Park, Suite {activeOffice.isHQ ? (language === 'de' ? '400 (Hauptverwaltung)' : '400 (Executive Office)') : (language === 'de' ? '18 (Entwicklungsknoten)' : '18 (Engineering Node)')}
+                      {activeOffice.city} {activeOffice.isHQ ? (language === 'de' ? ' (Hauptverwaltung)' : ' (Executive Office)') : (language === 'de' ? ' (Entwicklungsknoten)' : ' (Engineering Node)')}
                     </span>
                   </div>
                 </div>

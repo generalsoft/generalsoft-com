@@ -165,27 +165,17 @@ export const OFFICES: Office[] = [
     x: 18,
     y: 35,
     isHQ: true,
-    email: "sales-na@generalsoft.com",
+    email: "sales@generalsoft.com",
     phone: "+1 (206) 218-8385"
   },
   {
-    city: "Munich",
-    country: "Germany (EMEA)",
-    timezone: "Europe/Berlin",
-    x: 48,
-    y: 28,
-    isHQ: false,
-    email: "sales-eu@generalsoft.com",
-    phone: "+49 69 555 9811"
-  },
-  {
-    city: "RAK",
+    city: "RAKEZ, Ras Al Khaimah",
     country: "UAE (APAC)",
     timezone: "Asia/Dubai",
     x: 82,
     y: 36,
     isHQ: false,
-    email: "sales-me@generalsoft.com",
+    email: "sales@generalsoft.com",
     phone: "+971 55 880 9863"
   },
 ];
