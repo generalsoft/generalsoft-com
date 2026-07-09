@@ -7,7 +7,7 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { Terminal, Database, Server, ChevronDown, CheckCircle2 } from 'lucide-react';
 import { useLanguage } from './LanguageContext';
-import heroImage from '../assets/images/generalsoft_hero_1780398091321.png';
+import heroImage from '../assets/images/generalsoft_hero_1780398091321.jpeg';
 import leaderImage from '../assets/images/AN-Rotana.jpg';
 
 export default function Hero() {
@@ -114,7 +114,7 @@ export default function Hero() {
                   <span className="w-2.5 h-2.5 rounded-full bg-amber-400" />
                   <span className="w-2.5 h-2.5 rounded-full bg-emerald-400" />
                 </div>
-                <span className="text-[10px] font-mono tracking-widest text-slate-500">GS_RESONANCE_ENGINE.sh</span>
+                <span className="text-[10px] font-mono tracking-widest text-slate-500">GS_ORCHESTRATION_ENGINE.sh</span>
                 <span className="w-3.5" />
               </div>
 
@@ -125,7 +125,7 @@ export default function Hero() {
                     <Server className="w-4 h-4 animate-pulse" />
                   </div>
                   <div>
-                    <span className="block font-sans font-bold text-xs text-white">Resonator-Node v4.18</span>
+                    <span className="block font-sans font-bold text-xs text-white">Resonant Nexus</span>
                     <span className="block font-mono text-[9px] text-indigo-200 tracking-wider font-semibold">{t('hero_sys_secure')}</span>
                   </div>
                 </div>
