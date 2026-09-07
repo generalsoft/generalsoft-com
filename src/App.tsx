@@ -32,6 +32,7 @@ import Careers from "./components/Careers.tsx";
 import Timeline from "./components/Timeline.tsx";
 import Values from "./components/Values.tsx";
 import Footer from "./components/Footer.tsx";
+import SupportPage from "./components/Support.tsx";
 import { useLanguage } from "./components/LanguageContext.tsx";
 import { PARTNERS } from "./data";
 
@@ -731,7 +732,7 @@ export default function App() {
         {
           "@type": "ContactPoint",
           "contactType": "customer support",
-          "url": "https://generalsoft.com/contact",
+          "url": "https://generalsoft.com/#support",
           "availableLanguage": ["English"]
         }
       ],
@@ -782,10 +783,11 @@ export default function App() {
                             page === 'sla' ? <SLAPage onNavigate={navigateTo} /> :
                               page === 'success-stories' ? <SuccessStoriesPage onNavigate={navigateTo} /> :
                               page === 'configurator' ? <ConfiguratorPage onNavigate={navigateTo} /> :
+                              page === 'support' ? <SupportPage onNavigate={navigateTo} /> :
                                 <LandingPage />}
       </main>
 
-      <Footer onNavigate={(sectionId) => { window.location.hash = sectionId; }} />
+      <Footer onNavigate={navigateTo} />
 
       {cookieConsent === null ? (
         <div className="fixed inset-x-0 bottom-0 z-50 bg-slate-950 text-white px-4 py-4 shadow-2xl border-t border-slate-700">

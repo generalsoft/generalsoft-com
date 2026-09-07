@@ -24,6 +24,7 @@ const NAV_LABELS: Record<'en' | 'de', Record<string, string>> = {
     journey: 'Journey',
     team: 'Team',
     offices: 'Offices',
+    support: 'Support',
     contact: 'Contact',
     sla: 'SLA'
   },
@@ -37,6 +38,7 @@ const NAV_LABELS: Record<'en' | 'de', Record<string, string>> = {
     journey: 'Historie',
     team: 'Team',
     offices: 'Standorte',
+    support: 'Support',
     contact: 'Kontakt',
     sla: 'SLA'
   }
@@ -47,7 +49,7 @@ export default function Header({ onNavigate, activeSection }: HeaderProps) {
   const labels = NAV_LABELS[language];
 
   const [mobileOpen, setMobileOpen] = useState(false);
-  const navItems = ['about', 'partners', 'success-stories', 'services', 'configurator', 'values', 'journey', 'team', 'offices', 'contact'];
+  const navItems = ['about', 'partners', 'success-stories', 'services', 'configurator', 'values', 'journey', 'team', 'offices', 'support', 'contact'];
 
 
   const handleNav = (key: string) => {

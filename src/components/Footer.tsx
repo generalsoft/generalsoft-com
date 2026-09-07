@@ -27,6 +27,7 @@ export default function Footer({ onNavigate }: FooterProps) {
       <div className="max-w-7xl mx-auto w-full flex flex-col sm:flex-row items-center justify-between gap-4 font-sans text-[11px] text-slate-400 font-medium">
         <span>&copy; {currentYear} Generalsoft Corporation. {language === 'de' ? 'Alle Rechte vorbehalten.' : 'All rights reserved.'}</span>
         <div className="flex flex-wrap items-center gap-4 font-normal">
+          <button onClick={() => handleLinkClick('support')} className="hover:text-indigo-600 transition-colors cursor-pointer font-bold">Support</button>
           <button onClick={() => handleLinkClick('careers')} className="hover:text-indigo-600 transition-colors cursor-pointer font-bold">{language === 'de' ? 'Karriere' : 'Careers'}</button>
           <button onClick={() => handleLinkClick('privacy')} className="hover:text-indigo-600 transition-colors cursor-pointer">{t('footer_privacy')}</button>
           <button onClick={() => handleLinkClick('terms')} className="hover:text-indigo-600 transition-colors cursor-pointer">{t('footer_security')}</button>

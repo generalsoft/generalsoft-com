@@ -17,6 +17,7 @@ Generalsoft also operates an affiliate/regional presence via https://generalsoft
 - Leadership Team: https://generalsoft.com/#team
 - Global Offices: https://generalsoft.com/#offices
 - Partners: https://generalsoft.com/#partners
+- Support: https://generalsoft.com/#support
 - Contact: https://generalsoft.com/#contact
 
 ---
@@ -45,7 +46,8 @@ Generalsoft also operates an affiliate/regional presence via https://generalsoft
 ## Contact Information
 
 - Headquarters: Seattle, WA, USA
-- Support: info@generalsoft.com
+- Support: https://generalsoft.com/#support
+- Support Email: info@generalsoft.com
 - Website: https://generalsoft.com
 - Affiliate: https://generalsoft.ae
 
